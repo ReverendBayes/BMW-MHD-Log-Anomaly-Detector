@@ -68,12 +68,15 @@ Into this:
 Each line like:
 
 ⚠️ Throttle mismatch (pedal=51.4%, throttle=21.3%) @ 395.754s
+
 ⚠️ Hesitation RPM anomaly @ 395.754s
+
 Means:
 
 The model noticed that the pedal position is high, but the throttle isn’t opening accordingly
 
-The RPM is in the 1600–1800 “hesitation” range, and something else was off (e.g., low throttle delta, AFR oddity, etc.)
+The RPM is in the 1600–1800 “hesitation” range, and something else was off (e.g., low throttle delta, AFR oddity, etc.
+
 ---
 
 ## How to Use
