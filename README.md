@@ -32,10 +32,6 @@ Clear diagnostic output with timestamps and signal values
 - Flags AFR swings during idle (RPM < 900)
 - Used to catch idle air control valve issues, misfires, fuel delivery noise, or false sensor readings
 
-### 5. Repeating AFR = 235.19
-- Flags repeating 235.19 values as MHD logging bug or wideband sensor failure
-- Repeating values are ignored in real analysis but logged for reference
-
 ---
 From the current log file:
 ## ⚠️ Sample Output
@@ -77,6 +73,31 @@ The model noticed that the pedal position is high, but the throttle isn’t open
 
 The RPM is in the 1600–1800 “hesitation” range, and something else was off (e.g., low throttle delta, AFR oddity, etc.
 
+
+---
+
+### Machine Learning Pipeline
+
+This tool uses a machine learning model trained on binary diagnostic features extracted from real-world MHD logs.
+
+The model is based on [`IsolationForest`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html) from `scikit-learn`, trained to detect rare patterns such as AFR spikes, torque limiting behavior, and RPM anomalies.
+
+The training pipeline:
+
+- Loads MHD logs from `.csv`
+- Engineers binary features:
+  - `AFR_spike`
+  - `TPS_bug`
+  - `Pedal_Throttle_Mismatch`
+  - `RPM_idle`
+  - `RPM_hesitation`
+- Trains an unsupervised Isolation Forest model with contamination set to 0.05
+- Saves the model to `models/anomaly_model.pkl`
+
+**Training Code:** [`models/train_model.py`](models/train_model.py)
+
+At runtime, this model is loaded and applied to incoming logs using the plugin system in [`plugins/anomaly_detector.py`](plugins/anomaly_detector.py), where it flags any predictions of `-1` (anomalies) and explains them in detail.
+
 ---
 
 ## How to Use
@@ -89,11 +110,15 @@ The RPM is in the 1600–1800 “hesitation” range, and something else was off
 ---
 
 ## Dependencies
+- scikit-learn==1.3.0
+- joblib==1.3.2
+- numpy==1.26.4
+- pandas==2.2.0
 
-- Python 3.8+
-- pandas
-- numpy
-
+Optional: for future UI
+- streamlit==1.32.0
+-  dltlyse  (if applicable)
+  
 ---
 
 ## Future Plans
