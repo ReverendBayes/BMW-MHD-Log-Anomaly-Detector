@@ -22,6 +22,9 @@ Clear diagnostic output with timestamps and signal values
 - Flags mismatches between pedal input and throttle plate
 - Flags when the **throttle body opening lags significantly behind pedal input**
 - Example: Pedal at 100%, throttle at 30% → Indicates torque limiters, DME logic intervention, or throttle plate issues
+- **NOTE: In specific contexts:**
+-   The ECU intentionally closes the throttle under full pedal to control boost pressure.
+-   This behavior is not an error — it’s part of torque targeting, especially on turbocharged engines with electronic throttle control (e.g., BMW N54/N55 platforms)
 
 ### 3. Hesitation RPM Zone
 - Flags anomalies in the **1600–1800 RPM band**
