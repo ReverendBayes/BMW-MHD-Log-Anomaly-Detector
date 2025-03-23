@@ -57,6 +57,12 @@ From the current log file:
 Flags print with timestamps for easy lookup.
 
 
+It turns this:
+![MHD Log Data](assets/MHD-Log-Data.png)
+
+Into this:
+![Output](assets/Output.png)
+
 
 ### What the Output Means:
 Each line like:
