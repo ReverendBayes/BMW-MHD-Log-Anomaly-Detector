@@ -161,3 +161,5 @@ Optional: for future UI
     - No ECU intervention occurred  
   - Automating this helps users avoid wasting tuning time on invalid logs.
 
+---
+
