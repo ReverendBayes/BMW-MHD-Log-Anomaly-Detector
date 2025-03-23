@@ -1,9 +1,8 @@
 import os
 import joblib
 import pandas as pd
-from dltlyse.core.plugin_base import Plugin
 
-class AnomalyDetectionPlugin(Plugin):
+class AnomalyDetectionPlugin:
     def __init__(self):
         super().__init__()
         model_path = os.path.join(os.path.dirname(__file__), "../models/anomaly_model.pkl")
