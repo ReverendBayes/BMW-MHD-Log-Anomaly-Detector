@@ -3,9 +3,9 @@
 This tool analyzes MHD log files for data anomalies related to engine performance, AFR behavior, throttle behavior, and potential MHD logging bugs.
 
 It has:
-An Isolation Forest-based anomaly detector for BMW MHD logs
-Engineered features specific to known BMW issues (TPS bug, throttle lag, AFR spikes)
-A test suite and training pipeline using real-world data
+- An Isolation Forest-based anomaly detector for BMW MHD logs
+- Engineered features specific to known BMW issues (TPS bug, throttle lag, AFR spikes)
+- A test suite and training pipeline using real-world data
 
 Clear diagnostic output with timestamps and signal values
 
