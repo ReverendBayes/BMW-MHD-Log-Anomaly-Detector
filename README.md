@@ -117,7 +117,6 @@ At runtime, this model is loaded and applied to incoming logs using the plugin s
 
 Optional: for future UI
 - streamlit==1.32.0
--  dltlyse  (if applicable)
   
 ---
 
