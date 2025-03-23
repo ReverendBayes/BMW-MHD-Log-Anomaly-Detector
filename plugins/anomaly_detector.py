@@ -4,7 +4,6 @@ import pandas as pd
 
 class AnomalyDetectionPlugin:
     def __init__(self):
-        super().__init__()
         model_path = os.path.join(os.path.dirname(__file__), "../models/anomaly_model.pkl")
         self.model = joblib.load(model_path)
         self.results = []
