@@ -23,8 +23,8 @@ Clear diagnostic output with timestamps and signal values
 - Flags when the **throttle body opening lags significantly behind pedal input**
 - Example: Pedal at 100%, throttle at 30% → Indicates torque limiters, DME logic intervention, or throttle plate issues
 - **NOTE: In specific contexts:**
--   The ECU intentionally closes the throttle under full pedal to control boost pressure.
--   This behavior is not an error — it’s part of torque targeting, especially on turbocharged engines with electronic throttle control (e.g., BMW N54/N55 platforms)
+  -  The ECU intentionally closes the throttle under full pedal to control boost pressure.
+  -  This behavior is not an error — it’s part of torque targeting, especially on turbocharged engines with electronic throttle control (e.g., BMW N54/N55 platforms)
 
 ### 3. Hesitation RPM Zone
 - Flags anomalies in the **1600–1800 RPM band**
@@ -133,4 +133,34 @@ Optional: for future UI
 - Group anomalies into logical blocks
 - Add visualization support (e.g., throttle vs. pedal plots, AFR timelines)
 - Sensor bug auto-detection logic (e.g., repeated values)
+
+- **Context-aware throttle analysis using RPM and boost pressure**
+  - Current throttle mismatch detection is based on pedal vs throttle position alone.
+  - In turbocharged engines, it's normal for the ECU to *intentionally close the throttle* under full pedal to control boost (torque management).
+  - Adding RPM and/or boost pressure will reduce false positives by detecting *expected* vs *unexpected* throttle closure.
+  - This upgrade would distinguish between normal ECU behavior and actual throttle-related issues (e.g., DME logic faults, lag, or airflow problems).
+
+- **Support for ignition timing and cylinder-level timing corrections**
+  - Timing corrections are critical for identifying **knock events** and ECU intervention.
+  - By logging ignition timing and per-cylinder corrections, the tool could flag:
+    - Knock-induced ignition retard
+    - Uneven cylinder behavior
+    - Aggressive or unstable tuning
+  - These are often invisible to the driver but crucial for engine safety and performance diagnostics.
+
+- **Misfire detection and idle-quality analysis**
+  - Misfires at idle are often reported as "random pops" or instability.
+  - By analyzing timing, RPM fluctuation, and AFR noise during idle, the tool could detect:
+    - Soft misfires
+    - Weak combustion events
+    - Inconsistent fueling
+  - Would provide meaningful insight into common idle complaints — especially post-tune.
+
+- **Tune validation tooling**
+  - Tuners often request wide-open-throttle (WOT) pulls from 1500–6500 RPM in 3rd gear to evaluate logs.
+  - The detector could verify:
+    - Whether a log meets those criteria (RPM, gear, throttle consistency)
+    - Whether throttle stayed open, and ECU wasn't limiting power
+  - This would ensure clean logs before submission and flag invalid sessions automatically.
+
 
