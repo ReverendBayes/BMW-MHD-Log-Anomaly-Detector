@@ -1,2 +1,14 @@
+# System files
 .DS_Store
+
+# Python virtual environments
 venv/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Other/Optional
+# .env             # sensitive config (API keys, DB creds)
+# node_modules/    # JS dependencies 
+# *.log            # noisy runtime logs
